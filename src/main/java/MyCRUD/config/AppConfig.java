@@ -21,7 +21,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScan(basePackages = "MyCRUD")
+@ComponentScan("MyCRUD")
 public class AppConfig {
 
     @Value("${db.driver}")

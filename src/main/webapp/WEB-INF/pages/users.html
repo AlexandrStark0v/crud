@@ -2,52 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Пользователи</title>
+    <title>Все пользователи</title>
 </head>
 <body>
 <h1>Список пользователей</h1>
 
 <table border="1">
-    <thead>
     <tr>
         <th>ID</th>
         <th>Имя</th>
         <th>Email</th>
         <th>Действия</th>
     </tr>
-    </thead>
-    <tbody>
     <tr th:each="user : ${users}">
-        <td th:text="${user.id}">ID</td>
-        <td th:text="${user.name}">Имя</td>
-        <td th:text="${user.email}">Email</td>
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
         <td>
-            <!-- Кнопка удалить -->
-            <form th:action="@{/delete}" method="post" style="display:inline;">
-                <input type="hidden" name="id" th:value="${user.id}"/>
+            <a th:href="@{/update(id=${user.id})}">Редактировать</a>
+            <form th:action="@{/delete}" method="post" style="display:inline">
+                <input type="hidden" name="id" th:value="${user.id}">
                 <button type="submit">Удалить</button>
-            </form>
-
-            <!-- Кнопка обновить -->
-            <form th:action="@{/update}" method="post" style="display:inline;">
-                <input type="hidden" name="id" th:value="${user.id}"/>
-                <input type="text" name="name" th:value="${user.name}" required/>
-                <input type="email" name="email" th:value="${user.email}" required/>
-                <button type="submit">Обновить</button>
             </form>
         </td>
     </tr>
-    </tbody>
 </table>
 
-<hr>
-
-<h2>Добавить нового пользователя</h2>
-<form th:action="@{/add}" method="post">
-    <label>Имя: <input type="text" name="name" required/></label><br/>
-    <label>Email: <input type="email" name="email" required/></label><br/>
-    <button type="submit">Добавить</button>
-</form>
-
+<a href="/add">Добавить нового пользователя</a>
 </body>
 </html>

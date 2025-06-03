@@ -2,6 +2,9 @@ package MyCRUD.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "userCRUD")
@@ -11,9 +14,13 @@ public class User {
     private Long id;
 
     @Column(name = "name")
+    @NotBlank(message = "Имя не может быть пустым")
+    @Pattern(regexp = "^[a-zA-Zа-яА-Я]+$", message = "Имя должно содержать только буквы")
     private String name;
 
     @Column(name = "email")
+    @NotBlank(message = "Email не может быть пустым")
+    @Email(message = "Email должен быть корректным")
     private String email;
 
     public User() {}
